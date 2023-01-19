@@ -8,14 +8,45 @@ let page = 1;
 
 //! Const de llamada
 const root = "https://api.rawg.io/api/"; //* ---> Constante base
+const byPlatform = `${root}games?key=${process.env.API_KEY}&page=${page}&page_size=40&platforms=4,5`
 const allGames = `${root}games?key=${process.env.API_KEY}&page=${page}&page_size=40`;
+
 
 
 // ! GET "api/videogames"
 router.get("/", async (req, res, next) => {
+  
   try {
+    page = 1;
     const response = await axios.get(allGames);
     res.json(response.data);
+    
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ! GET "api/videogames/next"
+router.get("/next", async (req, res, next) => {
+  
+  try {
+    
+    const response = await axios.get(`${root}games?key=${process.env.API_KEY}&page=${page+=1}&page_size=40`);
+    res.json(response.data);
+    
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ! GET "api/videogames/previous"
+router.get("/previous", async (req, res, next) => {
+  
+  try {
+    
+    const response = await axios.get(`${root}games?key=${process.env.API_KEY}&page=${page-=1}&page_size=40`);
+    res.json(response.data);
+    
   } catch (error) {
     next(error);
   }
@@ -32,6 +63,19 @@ router.get("/:id/details", async (req, res, next) => {
     const response = await axios.get(gamesDetails);
     res.json(response.data);
     // console.log(response.data)
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ! GET "api/videogames/platform"
+router.get("/platform", async (req, res, next) => {
+  
+  try {
+    page = 1;
+    const response = await axios.get(byPlatform);
+    res.json(response.data);
+    
   } catch (error) {
     next(error);
   }
