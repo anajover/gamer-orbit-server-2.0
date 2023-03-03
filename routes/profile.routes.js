@@ -48,8 +48,8 @@ router.patch("/:id/edit", isAuthenticated, async (req, res, next) => {
     collections,
   } = req.body;
 
-console.log(req.payload)
-console.log(req.body)
+// console.log(req.payload)
+// console.log(req.body)
   try {
    await UserModel.findByIdAndUpdate(_id, req.body )
     //   avatar: image,
@@ -93,7 +93,7 @@ router.get("/collections", isAuthenticated, async (req, res, next) => {
     //! Aquí es súper importante hacer el populate ya que nuestra relación entre Game y User Model se fundamente en el id del usuario.
     const response = await GameModel.find().populate(banano);
     res.json(response);
-    console.log(response)
+    // console.log(response)
   } catch (error) {
     next(error);
   }

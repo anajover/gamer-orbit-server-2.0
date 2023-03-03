@@ -56,7 +56,7 @@ router.get("/previous", async (req, res, next) => {
 router.get("/:id/details", async (req, res, next) => {
 
   const {id} = req.params
-  console.log(id);
+  // console.log(id);
   const gamesDetails = `https://api.rawg.io/api/games/${id}?key=${process.env.API_KEY}`;
 
   try {
@@ -85,7 +85,7 @@ router.get("/platform", async (req, res, next) => {
 router.get("/:id/trailers", async (req, res, next) => {
 
     const {id} = req.params
-    console.log(id);
+    // console.log(id);
     const gamesTrailers = `https://api.rawg.io/api/games/${id}/movies?key=${process.env.API_KEY}`;
   
     try {
@@ -105,7 +105,7 @@ router.post("/:id/collections", isAuthenticated, async (req, res, next) => {
     
   try {
 
-      console.log("Me cago!")
+      // console.log("Me cago!")
     
     await GameModel.create({
       userId,
@@ -129,7 +129,7 @@ router.post("/:id/collections", isAuthenticated, async (req, res, next) => {
 
     try {
   
-        console.log("videogame")
+        // console.log("videogame")
         //! Aquí buscamos en el modelo mediante el id de cada juego (el numérico tipo 1456) y hacemos un objeto con populate a partir del _id del usuario para obtener el username.
         const response = await CommentModel.find({videogame: id}).populate("usernameId")
         res.json(response)
@@ -148,7 +148,7 @@ router.post("/:id/collections", isAuthenticated, async (req, res, next) => {
 
     try {
 
-      console.log("Post de commeeeeeent")
+      // console.log("Post de commeeeeeent")
 
       await CommentModel.create({
         videogame: id,
